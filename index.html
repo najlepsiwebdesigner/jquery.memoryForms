@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+
+  <head>
+    <title>memoryForms test page and example page</title>
+    <meta charset="utf-8" />
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <style>
+    	body {
+    		padding:20px;
+    	}
+    	label {
+    		font-weight:bold !important;
+    	}
+    </style>
+    <script src="jquery-1.8.3.min.js"></script>
+    <script src="json2.js"></script>
+ 	<script src="jstorage.js"></script>
+ 	<script src="jquery.memoryForms.js"></script>
+    <script>
+		$(function(){
+			$('form').memoryForms();
+
+		});
+    </script>
+
+  </head>
+
+  <body>
+  	<h1>memoryForms test page and example page</h1>
+
+  		<p>
+  			<strong>memoryForms</strong> is a simple jQuery plugin with purpose of saving state of every form on the page. Initial setup:
+
+  			<pre>
+	&lt;script src=&quot;jquery-1.8.3.min.js&quot;&gt;&lt;/script&gt;
+	&lt;script src=&quot;json2.js&quot;&gt;&lt;/script&gt;
+	&lt;script src=&quot;jstorage.js&quot;&gt;&lt;/script&gt;
+	&lt;script src=&quot;jquery.memoryForms.js&quot;&gt;&lt;/script&gt;
+	&lt;script&gt;
+		$(function(){
+			$('form').memoryForms();
+		});
+	&lt;/script&gt;
+  			</pre>
+  		</p>
+  	<form>
+  		<h3>HTML 5 input elements</h3>
+
+
+
+  		<p>html code from <a href="http://www.456bereastreet.com/lab/html5-input-types/">http://www.456bereastreet.com/lab/html5-input-types/</a>, thanks!</p>
+		<div class="text">
+			<label for="type-text">Text (text)</label>
+			<input type="text" name="type-text" id="type-text">
+		</div>
+		<div class="text">
+			<label for="type-search">Search (search)</label>
+			<input type="search" name="type-search" id="type-search">
+		</div>
+		<div class="text">
+			<label for="type-tel">Telephone (tel)</label>
+			<input type="tel" name="type-tel" id="type-tel">
+		</div>
+		<div class="text">
+			<label for="type-url">URL (url)</label>
+			<input type="url" name="type-url" id="type-url">
+		</div>
+		<div class="text">
+			<label for="type-email">E-mail (email)</label>
+			<input type="email" name="type-email" id="type-email">
+		</div>
+		<div class="text">
+			<label for="type-datetime">Date and Time (datetime)</label>
+			<input type="datetime" name="type-datetime" id="type-datetime">
+		</div>
+		<div class="text">
+			<label for="type-date">Date (date)</label>
+			<input type="date" name="type-date" id="type-date">
+		</div>
+		<div class="text">
+			<label for="type-month">Month (month)</label>
+			<input type="month" name="type-month" id="type-month">
+		</div>
+		<div class="text">
+			<label for="type-week">Week (week)</label>
+			<input type="week" name="type-week" id="type-week">
+		</div>
+		<div class="text">
+			<label for="type-time">Time (time)</label>
+			<input type="time" name="type-time" id="type-time">
+		</div>
+		<div class="text">
+			<label for="type-datetime-local">Local Date and Time (datetime-local)</label>
+			<input type="datetime-local" name="type-datetime-local" id="type-datetime-local">
+		</div>
+		<div class="text">
+			<label for="type-number">Number (number)</label>
+			<input type="number" name="type-number" id="type-number" min="0" max="20">
+		</div>
+		<div class="text">
+			<label for="type-range">Range (range)</label>
+			<input type="range" name="type-range" id="type-range" min="0" max="100">
+		</div>
+		<div class="text">
+			<label for="type-color">Colour (color)</label>
+			<input type="color" name="type-color" id="type-color">
+		</div>
+		<div class="submit-area">
+			<input type="submit" value="Submit" class="btn" name="submit-1">
+		</div>
+		<h3>Basic textarea</h3>
+		<div>
+			<textarea name="textarea-basic" id="textarea-basic"></textarea>
+		</div>
+		<h3>Basic select element</h3>
+		<div>
+			<select name="select-basic" id="select-basic">
+				<option value="2">2</option>
+				<option value="1">1</option>
+			</select>
+		</div>
+		<h3>Basic select multiple element</h3>
+		<div>
+			<select amultiple="multiple">
+				<option value="0">0</option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+			</select>
+		</div>
+		<h3>Checkbox</h3>
+		<div>
+			<input type="checkbox" name="faker">
+		</div>
+	</form>
+
+  </body>
+
+</html>
