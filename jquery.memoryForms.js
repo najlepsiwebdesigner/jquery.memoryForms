@@ -22,75 +22,95 @@
         };
         
 
-        // Sample Function, Uncomment to use
+
         base.setupBindings = function(){
-        	// console.log(this.elements);
-        	if (! $.jStorage) {
-        		alert('jStorage not available!');
-        	}
 
-        	var preservations = {
-        		'input' : {
-        			'getData' : function (element) {
-        				if (element.attr('type') == 'checkbox'){
-        					return $(element).prop('checked');
-        				}
-
-        				return $(element).attr('value')
-        			},
-        			'setData' : function (element, data){
-        				if (element.attr('type') == 'checkbox'){
-        					$(element).prop('checked', data);
-        				}
-        				else {
-        					$(element).attr('value', data);
-        				}
-        			}
-
-        		},
-        		'select' : {
-        			'getData' : function (element){
-        				var selected = $(element).find('option:selected');
-			            selectedIndexes = [];
-			            selected.each(function(i, v){
-			                selectedIndexes.push($(v).index());
-			            });
-			            return selectedIndexes;
-        			},
-        			'setData' : function (element, selectedOptions) {
-        				if (selectedOptions != null){
-				            $(element).find('option').each(function(i, v){
-				                if (selectedOptions.indexOf(i) != -1){
-				                    $(v).prop('selected','selected')
-				                }
-				            });  
-			        	}
-        			}
-        		},
-        		'textarea' : {
-        			'getData' : function (element){
-        				return $(element).val();
-        			},
-        			'setData' : function (element, data){
-        				$(element).val(data);
-        			}
-        		}
-        	}
+            if (! $.jStorage) {
+                alert('jStorage not available!');
+            }
 
 
+            var preservations = {
+                'input' : {
+                    'getData' : function (element) {
+                        if (element.attr('type') == 'checkbox'){
+                            return $(element).prop('checked');
+                        }
+                        else if (element.attr('type') == 'radio'){
+                            $('[name="'+$(element).attr('name')+'"]').each(function (i, radio){
+                                if ($(radio).attr('id') != $(element).attr('id')){
+                                   
+                                    $.jStorage.set($(radio).attr('id'), false);
+                                }
+                            })
+                            return $(element).is(':checked');
+                        }
+
+                        return $(element).attr('value')
+                    },
+                    'setData' : function (element, data){
+                        if (data == null){return false;}
+                        
 
 
-        	$(this.elements).each(function(i, element){
-        		if ($(element).attr('name') != undefined)
-        		{	
-	        		$(element).bind('change.memoryForms', function (e){
-	        			$.jStorage.set($(this).attr('name'), preservations[$(this)[0].tagName.toLowerCase()].getData($(this)));
-	        		});
+                        if (element.attr('type') == 'checkbox'){
+                            $(element).prop('checked', data);
+                        }
+                        else if (element.attr('type') == 'radio'){
+                            $(element).prop('checked', data);
+                        }
+                        else {
+                            $(element).attr('value', data);
+                        }
+                    }
 
-	        		preservations[$(element)[0].tagName.toLowerCase()].setData($(element), $.jStorage.get($(element).attr('name')));
-        		}
-        	});
+                },
+                'select' : {
+                    'getData' : function (element){
+                        var selected = $(element).find('option:selected');
+                        selectedIndexes = [];
+                        selected.each(function(i, v){
+                            selectedIndexes.push($(v).index());
+                        });
+                        return selectedIndexes;
+                    },
+                    'setData' : function (element, selectedOptions) {
+                        if (selectedOptions != null){
+                            $(element).find('option').each(function(i, v){
+                                if (selectedOptions.indexOf(i) != -1){
+                                    $(v).prop('selected','selected')
+                                }
+                            });  
+                        }
+                    }
+                },
+                'textarea' : {
+                    'getData' : function (element){
+                        return $(element).val();
+                    },
+                    'setData' : function (element, data){
+                        $(element).val(data);
+                    }
+                }
+            }
 
+
+
+
+            $(this.elements).each(function(i, element){
+                if ($(element).attr('id') != undefined)
+                {   
+                    $(element).bind('change.memoryForms', function (e){
+                        $.jStorage.set($(this).attr('id'), preservations[$(this)[0].tagName.toLowerCase()].getData($(this)));
+                    });
+
+                    preservations[$(element)[0].tagName.toLowerCase()].setData($(element), $.jStorage.get($(element).attr('id')));
+                }
+            });
+
+            base.$el.bind('submit',function (e){
+                $.jStorage.flush();
+            });
 
         };
         
