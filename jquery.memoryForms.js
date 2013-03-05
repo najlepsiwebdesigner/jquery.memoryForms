@@ -4,6 +4,8 @@
         // to reference this class from internal events and functions.
         var base = this;
         
+        
+        
         // Access to jQuery and DOM versions of element
         base.$el = $(el);
         base.el = el;
@@ -18,15 +20,17 @@
             
             base.options = $.extend({},$.memoryForms.defaultOptions, options);
             
+            
             base.setupBindings();
         };
+        
         
 
 
         base.setupBindings = function(){
 
             if (! $.jStorage) {
-                alert('jStorage not available!');
+                throw 'jStorage not available!';
             }
 
 
@@ -102,9 +106,17 @@
                 {   
                     $(element).bind('change.memoryForms', function (e){
                         $.jStorage.set($(this).attr('id'), preservations[$(this)[0].tagName.toLowerCase()].getData($(this)));
+/*                         console.log(base); */
+                        if (base.options.TTL != undefined && typeof(base.TTL) === 'number') {
+/*                         console.log('set', base.options.TTL); */
+	                         $.jStorage.setTTL($(this).attr('id'), base.options.TTL);
+                        }
                     });
 
-                    preservations[$(element)[0].tagName.toLowerCase()].setData($(element), $.jStorage.get($(element).attr('id')));
+/*                     console.log($.jStorage.getTTL($(element).attr('id')),$(element).attr('id')); */
+                    if ($.jStorage.getTTL($(element).attr('id')) > 0){
+                    	preservations[$(element)[0].tagName.toLowerCase()].setData($(element), $.jStorage.get($(element).attr('id')));
+                    }
                 }
             });
 
