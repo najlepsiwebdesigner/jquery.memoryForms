@@ -19,8 +19,7 @@
  	<script src="jquery.memoryForms.js"></script>
     <script>
 		$(function(){
-			$('form').memoryForms(null, {TTL : 5000});
-
+			$('form').memoryForms({TTL : 5000});
 		});
     </script>
 
@@ -39,7 +38,10 @@
 	&lt;script src=&quot;jquery.memoryForms.js&quot;&gt;&lt;/script&gt;
 	&lt;script&gt;
 		$(function(){
-			$('form').memoryForms();
+			$('form').memoryForms(
+				{TTL:5000}, //keep the information for 5 seconds - only configuration option
+				null // directly pass elements to be preserved - accepts collection of jQuery objects			
+			); 
 		});
 	&lt;/script&gt;
   			</pre>
